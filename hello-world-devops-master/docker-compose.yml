@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  backend:
+    image: yolanmq/back-devops-project
+    environment:
+      - REDIS_HOST=redis
+    ports:
+      - 8081:8081
+    depends_on:
+      - redis
+    container_name: backend
+  frontend:
+    image: yolanmq/front-devops-project
+    ports:
+      - 80:80
+    container_name: frontend
+  redis:
+    image: redis
+    container_name: redis
