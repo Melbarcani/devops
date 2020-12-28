@@ -24,9 +24,10 @@ jobs:
    -
      name: Install, Tests & build
      run: |
-       npm install
-       npm test
-       npm run-script build
+      ssh test@test
+      #  npm install
+      #  npm test
+      #  npm run-script build
    -
      name: Docker build image front
      run: docker build -t nhadjarab/front-devops-project:latest -f Dockerfile.front .
