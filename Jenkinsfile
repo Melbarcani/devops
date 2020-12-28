@@ -1,13 +1,10 @@
 pipeline {
-    agent {
-        docker { image 'node:latest' }
-    }
+    agent any  {
     stages {
         stage('Test') {
             steps {
                 sh 'node --version'
-                sh 'npm cache clean --force'
-                sh ' npm install'
+                sh 'npm install'
                 sh 'npm test'
                 sh 'npm run-script build'
             }
