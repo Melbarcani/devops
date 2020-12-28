@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker { image 'node:14-alpine' }
+        docker { image 'node:latest' }
     }
     stages {
         stage('Test') {
@@ -10,6 +10,9 @@ pipeline {
                 sh 'npm test'
                 sh 'npm run-script build'
             }
+        }
+        stage('End Test') {
+            sh 'echo hello world!'
         }
     }
 }
