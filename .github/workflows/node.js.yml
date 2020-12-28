@@ -24,7 +24,7 @@ jobs:
    -
      name: Install, Tests & build
      run: |
-      ssh test@test
+      ssh -V
       #  npm install
       #  npm test
       #  npm run-script build
