@@ -7,7 +7,7 @@ pipeline {
                 sh 'npm install'
                 sh 'npm test'
                 // sh 'npm run-script build'
-                sh 'echo 1'
+                sh 'echo 2'
             }
         }
         stage('Docker build back images') {
