@@ -12,7 +12,9 @@ pipeline {
             }
         }
         stage('End Test') {
-            sh 'echo hello world!'
+            steps {
+                sh 'echo hello world!'
+            }
         }
     }
 }
