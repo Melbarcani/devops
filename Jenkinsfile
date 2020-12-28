@@ -6,7 +6,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'node --version'
-                sh 'chown -R 111:115 "/.npm"'
+                sh 'npm cache clean --force'
                 sh ' npm install'
                 sh 'npm test'
                 sh 'npm run-script build'
