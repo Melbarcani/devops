@@ -9,9 +9,14 @@ pipeline {
                 // sh 'npm run-script build'
             }
         }
-        stage('End Test') {
+        stage('Docker build back images') {
             steps {
-                sh 'echo finished testing'
+                sh 'docker build -t nhadjarab/back-devops-project:latest -f Dockerfile.back .'
+            }
+        }
+        stage('Docker build front images') {
+            steps {
+                sh 'docker build -t nhadjarab/front-devops-project:latest -f Dockerfile.front .'
             }
         }
     }
