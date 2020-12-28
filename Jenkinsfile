@@ -6,6 +6,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'node --version'
+                sh 'sudo chown -R 111:115 "/.npm"'
                 sh ' npm install'
                 sh 'npm test'
                 sh 'npm run-script build'
