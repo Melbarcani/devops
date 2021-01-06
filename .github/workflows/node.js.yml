@@ -39,11 +39,11 @@ jobs:
      name: Docker build image front
      run: |
       docker build -t "$DOCKERHUB_REPO:front" -f Dockerfile.front .
-  #  -
-  #    name: Docker push image front
-  #    run: |
-  #      echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login $DOCKER_REGISTRY --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-  #      docker push $DOCKERHUB_REPO/front
+   -
+     name: Docker push image front
+     run: |
+       echo $PASS | docker login $DOCKER_REGISTRY --username $USERNAME --password-stdin
+       docker push $DOCKERHUB_REPO/front
 
   # back:
   #  runs-on: ubuntu-latest
