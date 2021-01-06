@@ -28,26 +28,22 @@ jobs:
       #  npm install
       #  npm test
       #  npm run-script build
+      echo ${secrets.DOCKERHUB_REPO}
    -
      name: Docker build image front
-     run: docker build -t nhadjarab/front-devops-project:latest -f Dockerfile.front .
+     run: docker build -t $DOCKERHUB_REPO:front -f Dockerfile.front .
    -
      name: Docker push image front
      run: |
        echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login $DOCKER_REGISTRY --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-       docker push nhadjarab/front-devops-project:latest
+       docker push $DOCKERHUB_REPO/front
 
   back:
    runs-on: ubuntu-latest
    strategy:
      matrix:
-       node-version: [8.x]
-   steps:
-     -
-       name: Checkout
-       uses: actions/checkout@v2
-     -
-       name: Use Node.js ${{ matrix.node-version }}
+       node-version: [8.x] steps: - name: Checkout uses: actions/checkout@v2 -
+                 name: Use Node.js ${{ matrix.node-version }}
        uses: actions/setup-node@v1
        with:
          node-version: ${{ matrix.node-version }}
@@ -84,7 +80,7 @@ jobs:
       #     chmod 500 private_key
       #     ssh-add private_key
       #     cd scaleway-terraform/
-      #     export SCALEWAY_ORGANIZATION=${{ secrets.SCALEWAY_ORGANIZATION }}
+                                                                                                                                                                                                                                                                                                                                                                                                       #     export SCALEWAY_ORGANIZATION=${{ secrets.SCALEWAY_ORGANIZATION }}
       #     export SCW_ACCESS_KEY=${{ secrets.SCW_ACCESS_KEY }}
       #     export SCW_SECRET_KEY=${{ secrets.SCW_SECRET_KEY }}
       #     terraform init
