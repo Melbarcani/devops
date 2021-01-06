@@ -27,19 +27,19 @@ jobs:
        DOCKERHUB_REPO: ${{secrets.DOCKERHUB_REPO}}
      run: |
       ssh -V
+      echo hello secret = $DOCKERHUB_REPO !
       #  npm install
       #  npm test
       #  npm run-script build
-   -
-     name: Docker build image front
-     run: |
-      echo hello $DOCKERHUB_REPO
-      docker build -t ${{secrets.DOCKERHUB_REPO}}:front -f Dockerfile.front .
-   -
-     name: Docker push image front
-     run: |
-       echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login $DOCKER_REGISTRY --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-       docker push $DOCKERHUB_REPO/front
+  #  -
+  #    name: Docker build image front
+  #    run: |
+  #     docker build -t ${{secrets.DOCKERHUB_REPO}}:front -f Dockerfile.front .
+  #  -
+  #    name: Docker push image front
+  #    run: |
+  #      echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login $DOCKER_REGISTRY --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+  #      docker push $DOCKERHUB_REPO/front
 
   # back:
   #  runs-on: ubuntu-latest
