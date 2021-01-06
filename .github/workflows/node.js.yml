@@ -32,35 +32,35 @@ jobs:
       #  npm run-script build
    -
      name: Docker build image front
-     run: docker build -t $DOCKERHUB_REPO:front -f Dockerfile.front .
+     run: docker build -t ${DOCKERHUB_REPO}:front -f Dockerfile.front .
    -
      name: Docker push image front
      run: |
        echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login $DOCKER_REGISTRY --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
        docker push $DOCKERHUB_REPO/front
 
-  back:
-   runs-on: ubuntu-latest
-   strategy:
-     matrix:
-       node-version: [8.x]
-   steps:
-     -
-       name: Checkout
-       uses: actions/checkout@v2
-     -
-       name: Use Node.js ${{ matrix.node-version }}
-       uses: actions/setup-node@v1
-       with:
-         node-version: ${{ matrix.node-version }}
-     -
-       name: Install & Tests
-       run: |
-         npm install
-         npm test
-     -
-       name: Docker build image back
-       run: docker build -t nhadjarab/back-devops-project:latest -f Dockerfile.back .
+  # back:
+  #  runs-on: ubuntu-latest
+  #  strategy:
+  #    matrix:
+  #      node-version: [8.x]
+  #  steps:
+  #    -
+  #      name: Checkout
+  #      uses: actions/checkout@v2
+  #    -
+  #      name: Use Node.js ${{ matrix.node-version }}
+  #      uses: actions/setup-node@v1
+  #      with:
+  #        node-version: ${{ matrix.node-version }}
+  #    -
+  #      name: Install & Tests
+  #      run: |
+  #        npm install
+  #        npm test
+  #    -
+  #      name: Docker build image back
+  #      run: docker build -t nhadjarab/back-devops-project:latest -f Dockerfile.back .
     #  -
       #  name: Docker push image back
       #  run: |
