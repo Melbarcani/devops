@@ -35,10 +35,10 @@ jobs:
       #  npm install
       #  npm test
       #  npm run-script build
-  #  -
-  #    name: Docker build image front
-  #    run: |
-  #     docker build -t ${{secrets.DOCKERHUB_REPO}}:front -f Dockerfile.front .
+   -
+     name: Docker build image front
+     run: |
+      docker build -t "$DOCKERHUB_REPO:front" -f Dockerfile.front .
   #  -
   #    name: Docker push image front
   #    run: |
