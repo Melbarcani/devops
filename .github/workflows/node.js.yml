@@ -32,7 +32,9 @@ jobs:
       #  npm run-script build
    -
      name: Docker build image front
-     run: docker build -t ${DOCKERHUB_REPO}:front -f Dockerfile.front .
+     run: |
+      echo $DOCKERHUB_REPO
+      docker build -t ${DOCKERHUB_REPO}:front -f Dockerfile.front .
    -
      name: Docker push image front
      run: |
