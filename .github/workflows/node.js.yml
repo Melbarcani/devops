@@ -31,11 +31,11 @@ jobs:
    -
      name: Docker build image front
      run: docker build -t nhadjarab/front-devops-project:latest -f Dockerfile.front .
-  #  -
-    #  name: Docker push image front
-    #  run: |
-    #    echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login $DOCKER_REGISTRY --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-    #    docker push yolanmq/front-devops-project:latest
+   -
+     name: Docker push image front
+     run: |
+       echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login $DOCKER_REGISTRY --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+       docker push nhadjarab/front-devops-project:latest
 
   back:
    runs-on: ubuntu-latest
