@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  DOCKERHUB_REPO: nhadjarab/back-devops-project
+  DOCKERHUB_REPO: nhadjarab/esgi-devops-repo
   USERNAME: "${{ secrets.DOCKERHUB_USERNAME }}"
   PASS: "${{ secrets.DOCKERHUB_PASS }}"
 
@@ -44,7 +44,7 @@ jobs:
      run: |
        echo $PASS | docker login $DOCKER_REGISTRY --username $USERNAME --password-stdin
        docker images
-       docker push "$DOCKERHUB_REPO/front"
+       docker push "$DOCKERHUB_REPO:front"
 
   # back:
   #  runs-on: ubuntu-latest
