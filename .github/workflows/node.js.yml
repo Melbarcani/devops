@@ -38,7 +38,7 @@ jobs:
    -
      name: Docker build image front
      run: |
-      docker build -t "$DOCKERHUB_REPO:front" -f Dockerfile.front .
+      docker build -t "$DOCKERHUB_REPO":front -f Dockerfile.front .
   #  -
   #    name: Docker push image front
   #    run: |
