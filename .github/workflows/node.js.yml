@@ -23,15 +23,16 @@ jobs:
        node-version: ${{ matrix.node-version }}
    -
      name: Install, Tests & build
+     env:
+       DOCKERHUB_REPO: ${{secrets.DOCKERHUB_REPO}}
      run: |
       ssh -V
       #  npm install
       #  npm test
       #  npm run-script build
-      echo ${secrets.DOCKERHUB_REPO}
    -
      name: Docker build image front
-     run: docker build -t $secrets.DOCKERHUB_REPO:front -f Dockerfile.front .
+     run: docker build -t $DOCKERHUB_REPO:front -f Dockerfile.front .
    -
      name: Docker push image front
      run: |
