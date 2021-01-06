@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  DOCKERHUB_REPO: "${{ secrets.DOCKERHUB_REPO }}"
+  DOCKERHUB_REPO: nhadjarab/back-devops-project
   USERNAME: "${{ secrets.DOCKERHUB_USERNAME }}"
   PASS: "${{ secrets.DOCKERHUB_PASS }}"
 
@@ -38,7 +38,7 @@ jobs:
    -
      name: Docker build image front
      run: |
-      docker build -t "$DOCKERHUB_REPO":front -f Dockerfile.front .
+      docker build -t "$DOCKERHUB_REPO:front" -f Dockerfile.front .
   #  -
   #    name: Docker push image front
   #    run: |
