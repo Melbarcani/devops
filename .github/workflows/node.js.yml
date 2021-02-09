@@ -10,78 +10,73 @@ env:
   DOCKERHUB_REPO: nhadjarab/esgi-devops-repo
   USERNAME: "${{ secrets.DOCKERHUB_USERNAME }}"
   PASS: "${{ secrets.DOCKERHUB_PASS }}"
-  # KEY: "${{secrets.SSH_KEY}}"
 
 jobs:
-  # front:
-  #  runs-on: ubuntu-latest
-  #  strategy:
-  #    matrix:
-  #      node-version: [8.x]
-  #  steps:
-  #  -
-  #    name: Checkout
-  #    uses: actions/checkout@v2
-  #  -
-  #    name: Use Node.js ${{ matrix.node-version }}
-  #    uses: actions/setup-node@v1
-  #    with:
-  #      node-version: ${{ matrix.node-version }}
-  #  -
-  #    name: Install, Tests & build
-  #    run: |
-  #      npm install
-  #      npm test
-  #      npm run-script build
-  #  -
-  #    name: Docker build image front
-  #    run: |
-  #     docker build -t "$DOCKERHUB_REPO:front" -f Dockerfile.front .
-  #  -
-  #    name: Docker push image front
-  #    run: |
-  #      echo $PASS | docker login --username $USERNAME --password-stdin
-  #      docker images
-  #      docker push "$DOCKERHUB_REPO:front"
+  front:
+   runs-on: ubuntu-latest
+   strategy:
+     matrix:
+       node-version: [8.x]
+   steps:
+   -
+     name: Checkout
+     uses: actions/checkout@v2
+   -
+     name: Use Node.js ${{ matrix.node-version }}
+     uses: actions/setup-node@v1
+     with:
+       node-version: ${{ matrix.node-version }}
+   -
+     name: Install, Tests & build
+     run: |
+       npm install
+       npm test
+       npm run-script build
+   -
+     name: Docker build image front
+     run: |
+      docker build -t "$DOCKERHUB_REPO:front" -f Dockerfile.front .
+   -
+     name: Docker push image front
+     run: |
+       echo $PASS | docker login --username $USERNAME --password-stdin
+       docker images
+       docker push "$DOCKERHUB_REPO:front"
 
-  # back:
-  #  runs-on: ubuntu-latest
-  #  strategy:
-  #    matrix:
-  #      node-version: [8.x]
-  #  steps:
-  #    -
-  #      name: Checkout
-  #      uses: actions/checkout@v2
-  #    -
-  #      name: Use Node.js ${{ matrix.node-version }}
-  #      uses: actions/setup-node@v1
-  #      with:
-  #        node-version: ${{ matrix.node-version }}
-  #    -
-  #      name: Install & Tests
-  #      run: |
-  #        npm install
-  #        npm test
-  #    -
-  #      name: Docker build image back
-  #      run: docker build -t "$DOCKERHUB_REPO:back" -f Dockerfile.back .
-  #    -
-  #      name: Docker push image back
-  #      run: |
-  #        echo $PASS | docker login --username $USERNAME --password-stdin
-  #        docker push "$DOCKERHUB_REPO:back"
+  back:
+   runs-on: ubuntu-latest
+   strategy:
+     matrix:
+       node-version: [8.x]
+   steps:
+     -
+       name: Checkout
+       uses: actions/checkout@v2
+     -
+       name: Use Node.js ${{ matrix.node-version }}
+       uses: actions/setup-node@v1
+       with:
+         node-version: ${{ matrix.node-version }}
+     -
+       name: Install & Tests
+       run: |
+         npm install
+         npm test
+     -
+       name: Docker build image back
+       run: docker build -t "$DOCKERHUB_REPO:back" -f Dockerfile.back .
+     -
+       name: Docker push image back
+       run: |
+         echo $PASS | docker login --username $USERNAME --password-stdin
+         docker push "$DOCKERHUB_REPO:back"
 
          
   deploy:
     runs-on: ubuntu-latest
-    # needs: [front, back]
+    needs: [front, back]
 
     steps:
-       -
-         name: printing 
-         run: 
-          echo "hello world"
        - 
         name: ssh-agent
         run: |
@@ -91,8 +86,8 @@ jobs:
        - name: ls -a via ssh
          uses: garygrossgarten/github-action-ssh@release
          with:
-            command: ls -a
             host: ${{ secrets.HOST }}
             username: ubuntu
             passphrase: ${{ secrets.PASSPHRASE }}
             privateKey: ${{ secrets.SSH_KEY}}
+            command: cd devops && sudo docker-compose up -d 
