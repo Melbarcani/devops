@@ -38,12 +38,10 @@ app.get('/hello', function (req, res) {
   })
 })
 
-const server = app.listen(8081, 'ec2-34-240-3-197.eu-west-1.compute.amazonaws.com', function () {
+const server = app.listen(8081, function () {
 
   const host = server.address().address
   const port = server.address().port
-  // const host = 'ec2-34-240-3-197.eu-west-1.compute.amazonaws.com'
-  // const port = 8081
   client = redis.createClient({
     'host': process.env['REDIS_HOST'] || 'localhost'
   })
