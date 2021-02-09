@@ -81,5 +81,6 @@ jobs:
          name: printing 
          run: 
           echo "hello world"
-       - name: ssh
+       - 
+        name: ssh
           ssh ubuntu@ec2-34-240-3-197.eu-west-1.compute.amazonaws.com /bin/echo "foo" > testFile 
