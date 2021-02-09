@@ -10,7 +10,7 @@ env:
   DOCKERHUB_REPO: nhadjarab/esgi-devops-repo
   USERNAME: "${{ secrets.DOCKERHUB_USERNAME }}"
   PASS: "${{ secrets.DOCKERHUB_PASS }}"
-  KEY: "${{secrets.SSH_KEY}}"
+  # KEY: "${{secrets.SSH_KEY}}"
 
 jobs:
   # front:
@@ -86,7 +86,8 @@ jobs:
         name: ssh-agent
         run: |
           eval `ssh-agent -s`
-          ssh-add - <<< "${KEY}"
+          echo ${secrets.SSH_KEY}
+          ssh-add - <<< ${secrets.SSH_KEY}
        - 
         name: logging
         run: |
