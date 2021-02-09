@@ -91,4 +91,6 @@ jobs:
             passphrase: ${{ secrets.PASSPHRASE }}
             privateKey: ${{ secrets.SSH_KEY}}
             command: 
-              cd devops && sudo docker-compose pull && sudo docker-compose up -d 
+              cd devops
+              sudo docker-compose pull
+              sudo docker-compose up -d 
