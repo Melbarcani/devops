@@ -83,14 +83,12 @@ jobs:
           eval `ssh-agent -s`
           ssh-add - <<< "${{ secrets.SSH_KEY }}"
      
-       - name: ls -a via ssh
+       - name: deploy
          uses: garygrossgarten/github-action-ssh@release
          with:
             host: ${{ secrets.HOST }}
             username: ubuntu
             passphrase: ${{ secrets.PASSPHRASE }}
             privateKey: ${{ secrets.SSH_KEY}}
-            script: 
-              cd devops
-              sudo docker-compose pull
-              sudo docker-compose up -d 
+            command: 
+              cd devops && sudo docker-compose pull && sudo docker-compose up -d 
