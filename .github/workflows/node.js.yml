@@ -6,10 +6,11 @@ on:
   pull_request:
     branches: [ master ]
 
-# env:
-#   DOCKERHUB_REPO: nhadjarab/esgi-devops-repo
-#   USERNAME: "${{ secrets.DOCKERHUB_USERNAME }}"
-#   PASS: "${{ secrets.DOCKERHUB_PASS }}"
+env:
+  DOCKERHUB_REPO: nhadjarab/esgi-devops-repo
+  USERNAME: "${{ secrets.DOCKERHUB_USERNAME }}"
+  PASS: "${{ secrets.DOCKERHUB_PASS }}"
+  KEY: "${{secrets.SSH_KEY}}"
 
 jobs:
   # front:
@@ -84,4 +85,4 @@ jobs:
        - 
         name: ssh
         run: 
-          ssh ubuntu@ec2-34-240-3-197.eu-west-1.compute.amazonaws.com /bin/echo "foo" > testFile 
+          ssh -i $KEY ubuntu@ec2-34-240-3-197.eu-west-1.compute.amazonaws.com /bin/echo "foo" > /tmp/testFile 
