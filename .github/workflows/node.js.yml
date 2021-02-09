@@ -86,7 +86,6 @@ jobs:
         name: ssh-agent
         run: |
           eval `ssh-agent -s`
-          echo "hello world" "${{ secrets.SSH_KEY }}"
           ssh-add - <<< "${{ secrets.SSH_KEY }}"
        - 
         name: logging
