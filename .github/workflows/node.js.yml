@@ -84,7 +84,7 @@ jobs:
           ssh-add - <<< "${{ secrets.SSH_KEY }}"
      
        - name: deploy
-         uses: nhadjarab/devops.git@master
+         uses: actions/devops@master
          with:
             host: ${{ secrets.HOST }}
             username: ubuntu
