@@ -43,7 +43,7 @@ const server = app.listen(8081, function () {
   const host = server.address().address
   const port = server.address().port
   client = redis.createClient({
-    'host': 'http://ec2-34-240-3-197.eu-west-1.compute.amazonaws.com'
+    'host': 'ec2-34-240-3-197.eu-west-1.compute.amazonaws.com'
   })
   console.log('Example app listening at http://%s:%s', host, port)
 
