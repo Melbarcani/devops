@@ -40,7 +40,6 @@ jobs:
      name: Docker push image front
      run: |
        echo $PASS | docker login --username $USERNAME --password-stdin
-       docker images
        docker push "$DOCKERHUB_REPO:front"
 
   back:
