@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   backend:
-    image: yolanmq/back-devops-project
+    image: nhadjarab/esgi-devops-repo:back
     environment:
       - REDIS_HOST=redis
     ports:
@@ -10,7 +10,7 @@ services:
       - redis
     container_name: backend
   frontend:
-    image: yolanmq/front-devops-project
+    image: nhadjarab/esgi-devops-repo:front
     ports:
       - 80:80
     container_name: frontend
