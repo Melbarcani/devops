@@ -83,8 +83,11 @@ jobs:
          run: 
           echo "hello world"
        - 
-        name: ssh
-        run: 
+        name: ssh-agent
+        run: |
           eval ssh-agent
           ssh-add - <<< "${KEY}"
-          ssh ubuntu@ec2-34-240-3-197.eu-west-1.compute.amazonaws.com /bin/echo "foo" > /tmp/testFile 
+       - 
+        name: logging
+        run: |
+          ssh ubuntu@ec2-34-240-3-197.eu-west-1.compute.amazonaws.com
